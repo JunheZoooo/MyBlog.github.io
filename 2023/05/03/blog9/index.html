@@ -1,223 +1,168 @@
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en">
-<!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  
-  <title>Phantom Read | Hexo</title>
-
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-  <meta name="description" content="Phantom Read refers to a situation where a transaction, upon querying a range consecutively, sees rows in the second query that it did not see in the first.">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Phantom Read | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Phantom Read refers to a situation where a transaction, upon querying a range consecutively, sees rows in the second query that it did not see in the first.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Phantom Read">
 <meta property="og:url" content="http://example.com/2023/05/03/blog9/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Phantom Read refers to a situation where a transaction, upon querying a range consecutively, sees rows in the second query that it did not see in the first.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80">
 <meta property="article:published_time" content="2023-05-03T04:00:00.000Z">
 <meta property="article:modified_time" content="2023-09-07T02:11:21.055Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/05/03/blog9/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Phantom Read',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-06 22:11:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
   
-    <link rel="icon" href="/favicon.ico">
-  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-  <meta content="{{ title }}" name="description">
-  <meta content="{{ title }}" name="keywords">
-  <meta content="{{ title }}" name="author">
-
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
-
-  <!-- Global styles START -->   
-  
-<link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
-
-  
-<link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
-
-  <!-- Global styles END --> 
-   
-  <!-- Page level plugin styles START -->
-  
-<link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
-
-  
-<link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
-
-  <!-- Page level plugin styles END -->
-
-  <!-- Theme styles START -->
-  
-<link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
-
-  
-<link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
-
-  
-<link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
-
-  
-<link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
-
-  
-<link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
-
-  
-<link rel="stylesheet" href="/metronic/assets/corporate/css/themes/red.css">
-
-  
-<link rel="stylesheet" href="/css/theme-styles.css">
-
-  <!-- Theme styles END -->
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body class="corporate">
-  <!-- BEGIN TOP BAR -->
-<div class="pre-header">
-  <div class="container">
-    <div class="row">
-      <!-- BEGIN TOP BAR LEFT PART -->
-      <div class="col-md-6 col-sm-6 col-xs-9 additional-shop-info">
-	<ul class="list-unstyled list-inline">
-	  <li><i class="fa fa-phone"></i><span>716-472-4484</span></li>
-	  <li><i class="fa fa-envelope-o"></i><span>ptsteadman@gmail.com</span></li>
-	</ul>
-      </div>
-      <!-- END TOP BAR LEFT PART -->
-      <!-- BEGIN TOP BAR MENU -->
-      <div class="col-md-6 col-sm-6 col-xs-3 additional-nav">
-	<ul class="list-unstyled list-inline pull-right">
-	  <li><a href="/login">Log In</a></li>
-	</ul>
-      </div>
-      <!-- END TOP BAR MENU -->
-    </div>
-  </div>        
-</div>
-<!-- END TOP BAR -->
-<!-- BEGIN HEADER -->
-<div class="header">
-  <div class="container">
-    <!--<a class="site-logo" href="/" id="logo">Hexo</a>-->
-
-    <a class="site-logo" href="/">
-      <img src="/metronic/assets/corporate/img/logos/logo-corp-red.png" alt="Metronic FrontEnd">
-    </a>
-
-    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
-
-    <!-- BEGIN NAVIGATION -->
-    <div class="header-navigation pull-right font-transform-inherit">
-      <ul>
-	
-	<li class="">
-	  <a  href="/">Home</a>
-	</li>
-	
-	<li class="">
-	  <a  href="/projects/">Projects</a>
-	</li>
-	
-	<li class="">
-	  <a  href="/archives/">Blog</a>
-	</li>
-	
-	<li class="">
-	  <a  href="/contact/">Contact</a>
-	</li>
-	
-	<li class="">
-	  <a  href="/about/">About</a>
-	</li>
-	
-	<!-- BEGIN TOP SEARCH -->
-	<li class="menu-search">
-	  <span class="sep"></span>
-	  <i class="fa fa-search search-btn"></i>
-	  <div class="search-box">
-	    <form action="#">
-	      <div class="input-group">
-		<input type="text" placeholder="Search" class="form-control st-default-search-input">
-		<span class="input-group-btn">
-		  <button class="btn btn-primary" type="submit">Search</button>
-		</span>
-	      </div>
-	    </form>
-	  </div> 
-	</li>
-	<!-- END TOP SEARCH -->
-      </ul>
-    </div>
-    <!-- END NAVIGATION -->
-  </div>
-</div>
-<!-- Header END -->
-
-  <div class="container">
-  <ul class="breadcrumb">
-    <li><a href="/">Home</a></li>
-    <li><a href="/archives/">Blog</a></li>
-    <li class="active">Post</li>
-  </ul>
-  <section id="main">
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-    <h2 itemprop="name">
-      <a class="article-title" href="/2023/05/03/blog9/">Phantom Read</a>
-    </h2>
-
-
-    <div class="row">
-<div class="col-md-9 col-sm-9 blog-posts">
-<article id="post-blog9" class="article article-type-post blog-item" itemscope itemprop="blogPost">
-  <div class="article-meta">
-  </div>
-  <div class="article-inner">
-    
-    
-    <header class="article-header">
-      <ul class="blog-info">
-	<li><i class="fa fa-user"></i> Anonymous</li>
-	<li><i class="fa fa-calendar"></i>
-	  <time datetime="2023-05-03T04:00:00.000Z" itemprop="datePublished">2023/05/03</time>
-
-	</li>
-	<li class="hidden-xs"><i class="fa fa-comments"></i>
-	  <a href="http://example.com/2023/05/03/blog9/#disqus_thread" class="article-comment-link">Comments</a>
-	</li>
-	<li class="hidden-xs"><i class="fa fa-tags"></i> 
-	  
-  
-    <a href="/tags/MySQL/" title="MySQL">MySQL</a>
-  
-
-
-	</li>
-      </ul>
-      
-  <div class="article-category">
-    
-    Category: 
-    
-    Categories:
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-  </div>
-  <br>
-
-
-    </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Phantom Read refers to a situation where a transaction, upon querying a range consecutively, sees rows in the second query that it did not see in the first.</p>
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1769&amp;q=80" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><span class="site-name">Hexo</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Phantom Read</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-05-03T04:00:00.000Z" title="Created 2023-05-03 00:00:00">2023-05-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-09-07T02:11:21.055Z" title="Updated 2023-09-06 22:11:21">2023-09-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/MySQL/">MySQL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Phantom Read"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Phantom Read refers to a situation where a transaction, upon querying a range consecutively, sees rows in the second query that it did not see in the first.</p>
 <span id="more"></span>
 <h1 id="Phantom-Read"><a href="#Phantom-Read" class="headerlink" title="Phantom Read"></a>Phantom Read</h1><p><strong>Phantom Read</strong> refers to a situation where a transaction, upon querying a range consecutively, sees rows in the second query that it did not see in the first.</p>
 <h2 id="When-does-Phantom-Read-occur"><a href="#When-does-Phantom-Read-occur" class="headerlink" title="When does Phantom Read occur?"></a>When does Phantom Read occur?</h2><ul>
@@ -244,323 +189,4 @@
 <blockquote>
 <p><strong>Note</strong>: It’s recommended to use <code>limit</code> while deleting data. This not only controls the number of records deleted for safer operations but also reduces the lock scope.</p>
 </blockquote>
-
-      
-    </div>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2023/05/03/blog8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Principle of `order by` in MySQL
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/01/02/2016-01-02-Notes-On-Creating-A-Hexo-Theme/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Notes On Creating A Hexo Theme</div>
-    </a>
-  
-</nav>
-
-  
-  <br>
-</article>
-
-
-
-
-</div>
-<div class="col-md-3 col-sm-3 blog-sidebar">
-  <!-- CATEGORIES START -->
-<h2 class="no-top-space">Categories</h2>
-
-<div class="widget-wrap">
-  <div class="widget">
-    <ul class="nav sidebar-categories margin-bottom-40">
-      
-	<li>
-	  <a href="/categories/NET/">.NET (1)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/MySQL/">MySQL (13)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/NGINX/">NGINX (1)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Dynamics-NAV/">Dynamics NAV (2)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Java/">Java (3)</a>
-	</li>
-      
-	<li>
-	  <a href="/categories/Hexo/">Hexo (1)</a>
-	</li>
-      
-    </ul>
-  </div>
-</div>
-
-
-<!-- CATEGORIES END -->
-
-<!-- BEGIN BLOG TAGS -->
-<div class="blog-tags margin-bottom-20">
-  <h2>Tags</h2>
-  
-  <div class="widget-wrap">
-    <div class="widget">
-      
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag"><i class='fa fa-tags'></i>C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag"><i class='fa fa-tags'></i>Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL-Server-Architecture/" rel="tag"><i class='fa fa-tags'></i>MySQL Server Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL1/" rel="tag"><i class='fa fa-tags'></i>MySQL1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL2/" rel="tag"><i class='fa fa-tags'></i>MySQL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAV/" rel="tag"><i class='fa fa-tags'></i>NAV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/" rel="tag"><i class='fa fa-tags'></i>Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Resources/" rel="tag"><i class='fa fa-tags'></i>Resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/" rel="tag"><i class='fa fa-tags'></i>Visual Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Development/" rel="tag"><i class='fa fa-tags'></i>Web Development</a></li></ul>
-    </div>
-  </div>
-
-
-</div>
-<!-- END BLOG TAGS -->
-
-
-<!-- BEGIN FEATURED POSTS -->                            
-<h2>Featured Posts</h2>
-<div class="recent-news margin-bottom-10">
-  
-    
-      <div class="row margin-bottom-10">
-	<div class="col-md-4">
-	  <img src="https://s3.amazonaws.com/ptsteadman-images/vs.jpg" class="img-responsive ">
-	</div>
-	<div class="col-md-8">
-	  <h3><a href="http://example.com/2015/03/23/2015-03-23-Make-VS-Insert-Spaces/">Spaces for Newline Indents in VS</a></h3>
-	</div>                        
-      </div>
-    
-  
-    
-      <div class="row margin-bottom-10">
-	<div class="col-md-4">
-	  <img src="https://s3.amazonaws.com/ptsteadman-images/helloworld.jpg" class="img-responsive ">
-	</div>
-	<div class="col-md-8">
-	  <h3><a href="http://example.com/2014/02/23/2014-02-23-hello-world/">Database indexing</a></h3>
-	</div>                        
-      </div>
-    
-  
-    
-      <div class="row margin-bottom-10">
-	<div class="col-md-4">
-	  <img src="https://s3.amazonaws.com/ptsteadman-images/nginx-proxy.png" class="img-responsive ">
-	</div>
-	<div class="col-md-8">
-	  <h3><a href="http://example.com/2015/04/01/2015-04-01-NGINX-Static-Locations/">Static NGINX1 Locations</a></h3>
-	</div>                        
-      </div>
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-</div>
-<!-- END FEATURED POSTS -->                            
-
-</div>
-</div>
-
-  </section>
-</div>
-
-    <!-- BEGIN PRE-FOOTER -->
-    <div class="pre-footer">
-      <div class="container">
-        <div class="row">
-          <!-- BEGIN BOTTOM ABOUT BLOCK -->
-          <div class="col-md-4 col-sm-6 pre-footer-col">
-            <h2>About Us</h2>
-            <p>Computer Lab is a software development and marketing company based in Brooklyn, New York. <br><br> Computer Lab was founded in 2015, and is focused on so on and so forth.</p>
-          </div>
-          <!-- END BOTTOM ABOUT BLOCK -->
-
-          <!-- BEGIN BOTTOM CONTACTS -->
-          <div class="col-md-4 col-sm-6 pre-footer-col">
-            <h2>Contact</h2>
-            <address class="margin-bottom-40">
-              140 Metropolitan Avenue<br>
-              5th Floor<br>
-              Brooklyn, NY 11249<br>
-              Phone: 716-472-4484<br>
-              Email: <a href="mailto:ptsteadman@gmail.com">ptsteadman@gmail.com</a><br>
-            </address>
-          </div>
-          <!-- END BOTTOM CONTACTS -->
-
-	
-          <!-- BEGIN TWITTER BLOCK --> 
-          <div class="col-md-4 col-sm-6 pre-footer-col">
-
-	  <a data-tweet-limit="1" class="twitter-timeline" data-theme="dark"
-	  target="_blank" rel="noopener" href="https://twitter.com/computerlab_">Tweets by @computerlab_</a>
-
-	  <script>!function(d,s,id){var
-	  js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-          </div>
-          <!-- END TWITTER BLOCK -->
-	
-        </div>
-      </div>
-    </div>
-    <!-- END PRE-FOOTER -->
-
-    <!-- BEGIN FOOTER -->
-    <div class="footer">
-      <div class="container">
-        <div class="row">
-          <!-- BEGIN COPYRIGHT -->
-          <div class="col-md-6 col-sm-6 padding-top-10">
-                  &copy; 2023 Hexo<br>
- <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
-          </div>
-          <!-- END COPYRIGHT -->
-	  <!-- BEGIN SOCIAL -->
-<div class="col-md-6 col-sm-6">
-  <ul class="social-footer list-unstyled list-inline pull-right">
-    
-      <li><a target="_blank" rel="noopener" href="https://github.com/ptsteadman"><i class="fa fa-github"></i></a></li>
-    
-      <li><a target="_blank" rel="noopener" href="https://twitter.com/ptsteadman"><i class="fa fa-twitter"></i></a></li>
-    
-      <li><a target="_blank" rel="noopener" href="https://www.facebook.com/ptsteadman"><i class="fa fa-facebook"></i></a></li>
-    
-      <li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li>
-    
-      <li><a target="_blank" rel="noopener" href="https://linkedin.com/in/ptsteadman"><i class="fa fa-linkedin"></i></a></li>
-    
-      <li><a target="_blank" rel="noopener" href="http://stackoverflow.com/users/2480493/patrick-steadman"><i class="fa fa-stackoverflow"></i></a></li>
-    
-  </ul>  
-</div>
-<!-- END SOCIAL -->
-
-        </div>
-      </div>
-    </div>
-    <!-- END FOOTER -->
-
-  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
-<!--[if lt IE 9]>
-
-<script src="/metronic/assets/plugins/respond.min.js"></script>
-
-<![endif]--> 
-
-<script src="/metronic/assets/plugins/jquery.min.js"></script>
-
-
-<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
-
-
-<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-
-<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
-
-
-<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
-
-
-<script src="/metronic/assets/corporate/scripts/layout.js"></script>
-
-
-<script src="/js/wow.min.js"></script>
-
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-        Layout.init();    
-        Layout.initOWL();
-        Layout.initTwitter();
-        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
-        Layout.initNavScrolling(); 
-	new WOW().init();
-    });
-</script>
-<!-- END CORE PLUGINS -->
-
-<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
-
-
-
-
-
-
-
-<!-- END PAGE-SPECIFIC PLUGINS --> 
-
-<!-- BEGIN INTEGRATIONS -->
-
-
-
-
-
-<!-- END INTEGRATIONS -->
-
-</body>
-</html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2023/05/03/blog9/">http://example.com/2023/05/03/blog9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1769&amp;q=80" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/03/blog5/" title="Change Buffer"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Change Buffer</div></div></a></div><div class="next-post pull-right"><a href="/2023/05/03/blog6/" title="Database Table Space Reclamation"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Database Table Space Reclamation</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/05/03/blog11/" title="MySQL Logging Mechanism"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">MySQL Logging Mechanism</div></div></a></div><div><a href="/2023/05/03/blog10/" title="Temporarily Enhancing MySQL Performance"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">Temporarily Enhancing MySQL Performance</div></div></a></div><div><a href="/2023/05/03/blog12/" title="MySQL Master-Slave Replication Principles"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">MySQL Master-Slave Replication Principles</div></div></a></div><div><a href="/2023/05/03/blog14/" title="Master-Slave Switching Process"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">Master-Slave Switching Process</div></div></a></div><div><a href="/2023/05/03/blog15/" title="Data Recovery Methods"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">Data Recovery Methods</div></div></a></div><div><a href="/2023/05/03/blog13/" title="MySQL Parallel Replication Strategies"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">MySQL Parallel Replication Strategies</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1769&amp;q=80" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Phantom-Read"><span class="toc-number">1.</span> <span class="toc-text">Phantom Read</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#When-does-Phantom-Read-occur"><span class="toc-number">1.1.</span> <span class="toc-text">When does Phantom Read occur?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problems-with-Phantom-Reads"><span class="toc-number">1.2.</span> <span class="toc-text">Problems with Phantom Reads</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resolving-Phantom-Reads"><span class="toc-number">1.3.</span> <span class="toc-text">Resolving Phantom Reads</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Locking-Rules"><span class="toc-number">1.3.1.</span> <span class="toc-text">Locking Rules:</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/07/Hi/" title="Hi">Hi</a><time datetime="2023-09-07T04:04:57.000Z" title="Created 2023-09-07 00:04:57">2023-09-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/01/blog1/" title="MySQL Server Architecture?">MySQL Server Architecture?</a><time datetime="2023-08-01T18:33:35.000Z" title="Created 2023-08-01 14:33:35">2023-08-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/01/JavaConcurrency5/" title="Thread-Safe Collection Classes">Thread-Safe Collection Classes</a><time datetime="2023-08-01T18:33:35.000Z" title="Created 2023-08-01 14:33:35">2023-08-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/03/JavaConcurrency1/" title="Processes and Threads">Processes and Threads</a><time datetime="2023-05-03T04:00:00.000Z" title="Created 2023-05-03 00:00:00">2023-05-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/03/JavaConcurrency2/" title="Multithreading and Concurrency Concepts">Multithreading and Concurrency Concepts</a><time datetime="2023-05-03T04:00:00.000Z" title="Created 2023-05-03 00:00:00">2023-05-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
