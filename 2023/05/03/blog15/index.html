@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>Data Recovery Methods | Hexo</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="Data Recovery MethodsRecovering Deleted RowsIf you accidentally delete data rows using a DELETE statement, you can recover the data using the Flashback tool. The Flashback tool works by modifying the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Recovery Methods">
+<meta property="og:url" content="http://example.com/2023/05/03/blog15/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Data Recovery MethodsRecovering Deleted RowsIf you accidentally delete data rows using a DELETE statement, you can recover the data using the Flashback tool. The Flashback tool works by modifying the">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-03T04:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-07T02:36:09.395Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  
+<link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  
+<link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  
+<link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/corporate/css/themes/red.css">
+
+  
+<link rel="stylesheet" href="/css/theme-styles.css">
+
+  <!-- Theme styles END -->
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="corporate">
+  <!-- BEGIN TOP BAR -->
+<div class="pre-header">
+  <div class="container">
+    <div class="row">
+      <!-- BEGIN TOP BAR LEFT PART -->
+      <div class="col-md-6 col-sm-6 col-xs-9 additional-shop-info">
+	<ul class="list-unstyled list-inline">
+	  <li><i class="fa fa-phone"></i><span>716-472-4484</span></li>
+	  <li><i class="fa fa-envelope-o"></i><span>ptsteadman@gmail.com</span></li>
+	</ul>
+      </div>
+      <!-- END TOP BAR LEFT PART -->
+      <!-- BEGIN TOP BAR MENU -->
+      <div class="col-md-6 col-sm-6 col-xs-3 additional-nav">
+	<ul class="list-unstyled list-inline pull-right">
+	  <li><a href="/login">Log In</a></li>
+	</ul>
+      </div>
+      <!-- END TOP BAR MENU -->
+    </div>
+  </div>        
+</div>
+<!-- END TOP BAR -->
+<!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">Hexo</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/logo-corp-red.png" alt="Metronic FrontEnd">
+    </a>
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Blog</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/contact/">Contact</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box">
+	    <form action="#">
+	      <div class="input-group">
+		<input type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit">Search</button>
+		</span>
+	      </div>
+	    </form>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/archives/">Blog</a></li>
+    <li class="active">Post</li>
+  </ul>
+  <section id="main">
+    
+    <h2 itemprop="name">
+      <a class="article-title" href="/2023/05/03/blog15/">Data Recovery Methods</a>
+    </h2>
+
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-blog15" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> Anonymous</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2023-05-03T04:00:00.000Z" itemprop="datePublished">2023/05/03</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="http://example.com/2023/05/03/blog15/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/MySQL/" title="MySQL">MySQL</a>
+  
+
+
+	</li>
+      </ul>
+      
+  <div class="article-category">
+    
+    Category: 
+    
+    Categories:
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+  <br>
+
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+<h1 id="Data-Recovery-Methods"><a href="#Data-Recovery-Methods" class="headerlink" title="Data Recovery Methods"></a>Data Recovery Methods</h1><h2 id="Recovering-Deleted-Rows"><a href="#Recovering-Deleted-Rows" class="headerlink" title="Recovering Deleted Rows"></a>Recovering Deleted Rows</h2><p>If you accidentally delete data rows using a DELETE statement, you can recover the data using the Flashback tool. The Flashback tool works by modifying the contents of the binlog, allowing you to replay the data back into the original database. To use this method, ensure that <code>binlog_format</code> is set to <code>row</code> and <code>binlog_row_image</code> is set to <code>FULL</code>.</p>
+<p>When recovering individual transactions, follow these steps:</p>
+<ol>
+<li><p>For INSERT statements (Write_rows event in the binlog), change them to DELETE statements (Delete_rows event).</p>
+</li>
+<li><p>Similarly, for DELETE statements (Delete_rows event in the binlog), change them to INSERT statements (Write_rows event).</p>
+</li>
+<li><p>If the event is an Update_rows event, which records both the old and new values of the rows, swap the positions of these two rows.</p>
+</li>
+</ol>
+<h2 id="Recovering-Deleted-Databases-or-Tables"><a href="#Recovering-Deleted-Databases-or-Tables" class="headerlink" title="Recovering Deleted Databases or Tables"></a>Recovering Deleted Databases or Tables</h2><p>To recover data when an entire database or table is deleted, you’ll need to rely on full backups and incremental logs. This method assumes that you have regular full backups and real-time backups of binlogs.</p>
+<p>For instance, if someone deletes a database at 12 PM, follow these steps:</p>
+<ol>
+<li><p>Retrieve the latest full backup, assuming it’s taken daily at midnight.</p>
+</li>
+<li><p>Restore a temporary copy of the database from the backup.</p>
+</li>
+<li><p>Extract the binlog entries from after midnight.</p>
+</li>
+<li><p>Apply all these binlog entries, excluding the statements responsible for the accidental deletion, to the temporary copy.</p>
+</li>
+</ol>
+<h2 id="Recovering-from-rm-Data-Deletion"><a href="#Recovering-from-rm-Data-Deletion" class="headerlink" title="Recovering from rm Data Deletion"></a>Recovering from rm Data Deletion</h2><p>In a MySQL cluster with a high-availability mechanism, data deletion with <code>rm</code> isn’t a major concern. As long as it doesn’t destroy the entire cluster and only affects one node’s data, the HA system will elect a new master and ensure the cluster’s normal operation. Your task in such a scenario is to restore the data on the affected node and reintegrate it into the cluster.</p>
+<h2 id="Killing-a-Query-Thread"><a href="#Killing-a-Query-Thread" class="headerlink" title="Killing a Query Thread"></a>Killing a Query Thread</h2><p>When a user executes <code>KILL QUERY thread_id_B</code>, MySQL’s thread handling for the KILL command does two things:</p>
+<ol>
+<li><p>Changes the execution state of session B to THD::KILL_QUERY (sets the variable <code>killed</code> to THD::KILL_QUERY).</p>
+</li>
+<li><p>Sends a signal to the execution thread of session B.</p>
+</li>
+</ol>
+<h2 id="Impact-of-Full-Table-Scans-on-Server-Layer"><a href="#Impact-of-Full-Table-Scans-on-Server-Layer" class="headerlink" title="Impact of Full Table Scans on Server Layer"></a>Impact of Full Table Scans on Server Layer</h2><p>InnoDB stores data on the primary key index, making full table scans equivalent to scanning the primary key index of table <code>t</code>. Each row retrieved can be placed directly into the result set and sent to the client.</p>
+<p>The server doesn’t need to maintain a complete result set. Data retrieval and sending follow this process:</p>
+<ol>
+<li><p>Retrieve one row and write it to the <code>net_buffer</code>. The size of this memory block is defined by the <code>net_buffer_length</code> parameter, typically set to 16KB.</p>
+</li>
+<li><p>Keep retrieving rows until the <code>net_buffer</code> is full, then send it through the network interface.</p>
+</li>
+<li><p>If the send operation succeeds, clear the <code>net_buffer</code> and continue with the next row.</p>
+</li>
+<li><p>If the send function returns EAGAIN or WSAEWOULDBLOCK, indicating the local network stack’s send buffer is full, enter a wait state until the network stack becomes writable again, then resume sending.</p>
+</li>
+</ol>
+<p>MySQL operates in a “read and send” manner, which means that if the client is slow to receive, it can prolong the execution time of a transaction.</p>
+<h2 id="Impact-of-Full-Table-Scans-on-InnoDB"><a href="#Impact-of-Full-Table-Scans-on-InnoDB" class="headerlink" title="Impact of Full Table Scans on InnoDB"></a>Impact of Full Table Scans on InnoDB</h2><p>InnoDB uses a Least Recently Used (LRU) algorithm for memory management. This algorithm prioritizes evicting the least recently used data.</p>
+<p>InnoDB’s LRU algorithm for managing the Buffer Pool uses a linked list.</p>
+<ol>
+<li><p>In state 1 of the diagram, P1 is at the head of the list, indicating it was the most recently accessed data page. Let’s assume that memory can only hold this many data pages.</p>
+</li>
+<li><p>At this point, a read request accesses P3, moving it to the front as state 2.</p>
+</li>
+<li><p>State 3 indicates that the accessed data page doesn’t exist in the list, so a new data page Px is allocated in the Buffer Pool. However, since memory is full, a data page Pm at the end of the list is cleared, and Px’s content is stored in it, moving Px to the front.</p>
+</li>
+</ol>
+<p>Effectively, the data page Pm, which hasn’t been accessed for the longest time, is evicted.</p>
+<p>Imagine scanning a 200GB table using this algorithm, especially for a historical data table that isn’t typically accessed. The scanning process would replace the contents of the Buffer Pool with the scanned data pages, leading to a drop in Buffer Pool hit rate and slower SQL response times.</p>
+<p>InnoDB cannot use this LRU algorithm directly. In reality, InnoDB has improved upon the LRU algorithm.</p>
+<p>In InnoDB’s implementation, the LRU list is split into a young area and an old area in a 5:3 ratio. LRU_old points to the start of the old area, which is at 5&#x2F;8 of the list. This means that the first 5&#x2F;8 of the list is the young area, while the last 3&#x2F;8 is the old area.</p>
+<p>The improved LRU algorithm works as follows:</p>
+<ol>
+<li><p>In state 1, when accessing data page P3, since it’s in the young area, it’s moved to the front, becoming state 2.</p>
+</li>
+<li><p>When accessing a new data page not in the current list, it will be placed in the LRU_old section if memory is full.</p>
+</li>
+<li><p>Data pages in the old area, when accessed, will be judged based on how long they have been in the list:</p>
+<ul>
+<li>If a data page has been in the LRU list for more than 1 second, it will be moved to the front.</li>
+<li>If a data page has been in the list for less than 1 second, its position remains unchanged. The 1-second duration is controlled by the <code>innodb_old_blocks_time</code> parameter, with a default value of 1000 milliseconds.</li>
+</ul>
+</li>
+</ol>
+<p>Suppose you scan a 200GB table using this algorithm, and the table contains historical data with infrequent access. In this case, the scanning process will effectively replace the contents of the Buffer Pool with data from the historical table.</p>
+<p>For a production database serving live business operations, this is not ideal. The Buffer Pool’s memory hit rate drops, disk I&#x2F;O pressure increases, and SQL query responses become slower.</p>
+
+      
+    </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/05/03/blog14/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Master-Slave Switching Process
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/05/03/blog4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MySQL Locking Mechanisms</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/NET/">.NET (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/NGINX/">NGINX (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Dynamics-NAV/">Dynamics NAV (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (3)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Hexo/">Hexo (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag"><i class='fa fa-tags'></i>C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag"><i class='fa fa-tags'></i>Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL-Server-Architecture/" rel="tag"><i class='fa fa-tags'></i>MySQL Server Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL1/" rel="tag"><i class='fa fa-tags'></i>MySQL1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL2/" rel="tag"><i class='fa fa-tags'></i>MySQL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAV/" rel="tag"><i class='fa fa-tags'></i>NAV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/" rel="tag"><i class='fa fa-tags'></i>Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Resources/" rel="tag"><i class='fa fa-tags'></i>Resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/" rel="tag"><i class='fa fa-tags'></i>Visual Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Development/" rel="tag"><i class='fa fa-tags'></i>Web Development</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+
+
+<!-- BEGIN FEATURED POSTS -->                            
+<h2>Featured Posts</h2>
+<div class="recent-news margin-bottom-10">
+  
+    
+      <div class="row margin-bottom-10">
+	<div class="col-md-4">
+	  <img src="https://s3.amazonaws.com/ptsteadman-images/vs.jpg" class="img-responsive ">
+	</div>
+	<div class="col-md-8">
+	  <h3><a href="http://example.com/2015/03/23/2015-03-23-Make-VS-Insert-Spaces/">Spaces for Newline Indents in VS</a></h3>
+	</div>                        
+      </div>
+    
+  
+    
+      <div class="row margin-bottom-10">
+	<div class="col-md-4">
+	  <img src="https://s3.amazonaws.com/ptsteadman-images/helloworld.jpg" class="img-responsive ">
+	</div>
+	<div class="col-md-8">
+	  <h3><a href="http://example.com/2014/02/23/2014-02-23-hello-world/">Database indexing</a></h3>
+	</div>                        
+      </div>
+    
+  
+    
+      <div class="row margin-bottom-10">
+	<div class="col-md-4">
+	  <img src="https://s3.amazonaws.com/ptsteadman-images/nginx-proxy.png" class="img-responsive ">
+	</div>
+	<div class="col-md-8">
+	  <h3><a href="http://example.com/2015/04/01/2015-04-01-NGINX-Static-Locations/">Static NGINX1 Locations</a></h3>
+	</div>                        
+      </div>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+</div>
+<!-- END FEATURED POSTS -->                            
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN BOTTOM ABOUT BLOCK -->
+          <div class="col-md-4 col-sm-6 pre-footer-col">
+            <h2>About Us</h2>
+            <p>Computer Lab is a software development and marketing company based in Brooklyn, New York. <br><br> Computer Lab was founded in 2015, and is focused on so on and so forth.</p>
+          </div>
+          <!-- END BOTTOM ABOUT BLOCK -->
+
+          <!-- BEGIN BOTTOM CONTACTS -->
+          <div class="col-md-4 col-sm-6 pre-footer-col">
+            <h2>Contact</h2>
+            <address class="margin-bottom-40">
+              140 Metropolitan Avenue<br>
+              5th Floor<br>
+              Brooklyn, NY 11249<br>
+              Phone: 716-472-4484<br>
+              Email: <a href="mailto:ptsteadman@gmail.com">ptsteadman@gmail.com</a><br>
+            </address>
+          </div>
+          <!-- END BOTTOM CONTACTS -->
+
+	
+          <!-- BEGIN TWITTER BLOCK --> 
+          <div class="col-md-4 col-sm-6 pre-footer-col">
+
+	  <a data-tweet-limit="1" class="twitter-timeline" data-theme="dark"
+	  target="_blank" rel="noopener" href="https://twitter.com/computerlab_">Tweets by @computerlab_</a>
+
+	  <script>!function(d,s,id){var
+	  js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+          </div>
+          <!-- END TWITTER BLOCK -->
+	
+        </div>
+      </div>
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2023 Hexo<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/ptsteadman"><i class="fa fa-github"></i></a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/ptsteadman"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://www.facebook.com/ptsteadman"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://linkedin.com/in/ptsteadman"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a target="_blank" rel="noopener" href="http://stackoverflow.com/users/2480493/patrick-steadman"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+
+<![endif]--> 
+
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+
+
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+
+
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+
+
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+
+
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+
+
+<script src="/js/wow.min.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

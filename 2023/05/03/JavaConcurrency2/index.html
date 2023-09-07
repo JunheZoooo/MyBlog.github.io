@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>Multithreading and Concurrency Concepts | Hexo</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="Multithreading and Concurrency ConceptsCritical Section and Race Conditions Critical section: A code block where multiple threads access shared resources, potentially causing concurrency issues. Race">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multithreading and Concurrency Concepts">
+<meta property="og:url" content="http://example.com/2023/05/03/JavaConcurrency2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Multithreading and Concurrency ConceptsCritical Section and Race Conditions Critical section: A code block where multiple threads access shared resources, potentially causing concurrency issues. Race">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-03T04:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-07T02:47:46.667Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  
+<link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  
+<link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  
+<link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/corporate/css/themes/red.css">
+
+  
+<link rel="stylesheet" href="/css/theme-styles.css">
+
+  <!-- Theme styles END -->
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="corporate">
+  <!-- BEGIN TOP BAR -->
+<div class="pre-header">
+  <div class="container">
+    <div class="row">
+      <!-- BEGIN TOP BAR LEFT PART -->
+      <div class="col-md-6 col-sm-6 col-xs-9 additional-shop-info">
+	<ul class="list-unstyled list-inline">
+	  <li><i class="fa fa-phone"></i><span>716-472-4484</span></li>
+	  <li><i class="fa fa-envelope-o"></i><span>ptsteadman@gmail.com</span></li>
+	</ul>
+      </div>
+      <!-- END TOP BAR LEFT PART -->
+      <!-- BEGIN TOP BAR MENU -->
+      <div class="col-md-6 col-sm-6 col-xs-3 additional-nav">
+	<ul class="list-unstyled list-inline pull-right">
+	  <li><a href="/login">Log In</a></li>
+	</ul>
+      </div>
+      <!-- END TOP BAR MENU -->
+    </div>
+  </div>        
+</div>
+<!-- END TOP BAR -->
+<!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">Hexo</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/logo-corp-red.png" alt="Metronic FrontEnd">
+    </a>
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Blog</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/contact/">Contact</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box">
+	    <form action="#">
+	      <div class="input-group">
+		<input type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit">Search</button>
+		</span>
+	      </div>
+	    </form>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/archives/">Blog</a></li>
+    <li class="active">Post</li>
+  </ul>
+  <section id="main">
+    
+    <h2 itemprop="name">
+      <a class="article-title" href="/2023/05/03/JavaConcurrency2/">Multithreading and Concurrency Concepts</a>
+    </h2>
+
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-JavaConcurrency2" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> Anonymous</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2023-05-03T04:00:00.000Z" itemprop="datePublished">2023/05/03</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="http://example.com/2023/05/03/JavaConcurrency2/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/Java/" title="Java">Java</a>
+  
+
+
+	</li>
+      </ul>
+      
+  <div class="article-category">
+    
+    Category: 
+    
+    Categories:
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+  <br>
+
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+<h1 id="Multithreading-and-Concurrency-Concepts"><a href="#Multithreading-and-Concurrency-Concepts" class="headerlink" title="Multithreading and Concurrency Concepts"></a>Multithreading and Concurrency Concepts</h1><h2 id="Critical-Section-and-Race-Conditions"><a href="#Critical-Section-and-Race-Conditions" class="headerlink" title="Critical Section and Race Conditions"></a>Critical Section and Race Conditions</h2><ul>
+<li>Critical section: A code block where multiple threads access shared resources, potentially causing concurrency issues.</li>
+<li>Race condition: Occurs when multiple threads access a critical section with unpredictable execution sequences.</li>
+</ul>
+<h2 id="Avoiding-Race-Conditions"><a href="#Avoiding-Race-Conditions" class="headerlink" title="Avoiding Race Conditions"></a>Avoiding Race Conditions</h2><ul>
+<li>Blocking solutions: Use <code>synchronized</code> and locks.</li>
+<li>Non-blocking solutions: Utilize atomic variables.</li>
+</ul>
+<h2 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h2><ul>
+<li>Synchronized uses an object lock, allowing only one thread to enter a “room” at a time.</li>
+<li>Ensures atomicity within the critical section.</li>
+<li>Methods with <code>synchronized</code> on member methods lock the <code>this</code> object.</li>
+<li>Methods with <code>synchronized</code> on static methods lock the class object.</li>
+</ul>
+<h2 id="Thread-Safety-for-Shared-Resources"><a href="#Thread-Safety-for-Shared-Resources" class="headerlink" title="Thread Safety for Shared Resources"></a>Thread Safety for Shared Resources</h2><ul>
+<li>Ensure thread safety for shared variables (e.g., member and static variables) when read&#x2F;written by multiple threads.</li>
+<li>Pay attention to the scope of local variables.</li>
+</ul>
+<h2 id="Thread-Safe-Classes"><a href="#Thread-Safe-Classes" class="headerlink" title="Thread-Safe Classes"></a>Thread-Safe Classes</h2><ul>
+<li>Certain classes in Java are thread-safe by design, such as <code>String</code>, <code>Integer</code>, <code>StringBuffer</code>, <code>Random</code>, <code>Vector</code>, <code>Hashtable</code>, and classes in <code>java.util.concurrent</code>.</li>
+</ul>
+<h2 id="Monitors-and-Object-Header"><a href="#Monitors-and-Object-Header" class="headerlink" title="Monitors and Object Header"></a>Monitors and Object Header</h2><ul>
+<li>Every Java object is associated with a Monitor object.</li>
+<li>Locking an object involves modifying its header to point to a Monitor.</li>
+<li>Only one thread can be the owner of a Monitor.</li>
+</ul>
+<h2 id="Lightweight-Locking"><a href="#Lightweight-Locking" class="headerlink" title="Lightweight Locking"></a>Lightweight Locking</h2><ul>
+<li>Optimizes for scenarios where contention is minimal.</li>
+<li>Utilizes CAS (Compare-And-Swap) operations for synchronization.</li>
+</ul>
+<h2 id="Lock-Escalation-Lock-Inflation"><a href="#Lock-Escalation-Lock-Inflation" class="headerlink" title="Lock Escalation (Lock Inflation)"></a>Lock Escalation (Lock Inflation)</h2><ul>
+<li>Occurs when lightweight locking fails due to contention.</li>
+<li>Transitions from lightweight to heavyweight locks.</li>
+</ul>
+<h2 id="Self-Spinning-Spin-Locks"><a href="#Self-Spinning-Spin-Locks" class="headerlink" title="Self-Spinning (Spin Locks)"></a>Self-Spinning (Spin Locks)</h2><ul>
+<li>Threads may spin (loop without blocking) while waiting for a lock.</li>
+<li>Spinning can be more efficient than blocking in certain situations.</li>
+</ul>
+<h2 id="Biased-Locking"><a href="#Biased-Locking" class="headerlink" title="Biased Locking"></a>Biased Locking</h2><ul>
+<li>Aims to reduce lock overhead when there’s minimal contention.</li>
+<li>Threads bias a lock toward themselves to avoid CAS operations.</li>
+<li>Objects start with unbiased locking and become biased over time.</li>
+</ul>
+<h2 id="Lock-Coarsening"><a href="#Lock-Coarsening" class="headerlink" title="Lock Coarsening"></a>Lock Coarsening</h2><ul>
+<li>Combines multiple locks into a single lock to reduce synchronization overhead.</li>
+<li>Increases concurrency but may impact granularity.</li>
+</ul>
+<h2 id="Lock-Elimination"><a href="#Lock-Elimination" class="headerlink" title="Lock Elimination"></a>Lock Elimination</h2><ul>
+<li>JIT compiler optimizations may remove locks if they are deemed unnecessary.</li>
+</ul>
+<h2 id="Wait-and-Notify"><a href="#Wait-and-Notify" class="headerlink" title="Wait and Notify"></a>Wait and Notify</h2><ul>
+<li>Used for thread coordination.</li>
+<li><code>wait</code> makes a thread wait, releasing the lock.</li>
+<li><code>notify</code>&#x2F;<code>notifyAll</code> wakes up waiting threads.</li>
+</ul>
+<h2 id="Sleep-vs-Wait"><a href="#Sleep-vs-Wait" class="headerlink" title="Sleep vs. Wait"></a>Sleep vs. Wait</h2><ul>
+<li><code>sleep</code> waits for a specified time without releasing the lock.</li>
+<li><code>wait</code> releases the lock and waits for a notification.</li>
+</ul>
+<h2 id="Guarded-Suspension-Pattern"><a href="#Guarded-Suspension-Pattern" class="headerlink" title="Guarded Suspension Pattern"></a>Guarded Suspension Pattern</h2><ul>
+<li>A pattern for a thread to wait for another thread’s result.</li>
+</ul>
+<h2 id="LockSupport"><a href="#LockSupport" class="headerlink" title="LockSupport"></a>LockSupport</h2><ul>
+<li>Park and unpark threads.</li>
+<li>Provides fine-grained control over thread suspension.</li>
+</ul>
+<h2 id="Thread-States"><a href="#Thread-States" class="headerlink" title="Thread States"></a>Thread States</h2><ul>
+<li>Threads can transition between states: NEW, RUNNABLE, WAITING, TIMED_WAITING, BLOCKED, TERMINATED.</li>
+<li>Transition examples explained.</li>
+</ul>
+<h2 id="Multiple-Locks"><a href="#Multiple-Locks" class="headerlink" title="Multiple Locks"></a>Multiple Locks</h2><ul>
+<li>Using multiple locks to increase concurrency.</li>
+<li>May lead to deadlocks if not managed correctly.</li>
+</ul>
+<h2 id="Deadlocks"><a href="#Deadlocks" class="headerlink" title="Deadlocks"></a>Deadlocks</h2><ul>
+<li>Occur when threads wait for each other to release locks.</li>
+<li>Monitor and resolve deadlocks using tools like jconsole or jstack.</li>
+</ul>
+<h2 id="Starvation"><a href="#Starvation" class="headerlink" title="Starvation"></a>Starvation</h2><ul>
+<li>Occurs when a thread doesn’t get CPU time due to low priority.</li>
+<li>Fair locks may reduce starvation.</li>
+</ul>
+<h2 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h2><ul>
+<li>A flexible lock supporting features like interruptibility, timeouts, and fairness.</li>
+<li>Can be used with multiple conditions.</li>
+</ul>
+<h2 id="Interruptible-Locking"><a href="#Interruptible-Locking" class="headerlink" title="Interruptible Locking"></a>Interruptible Locking</h2><ul>
+<li>ReentrantLock supports interruptible locking using <code>lockInterruptibly</code>.</li>
+</ul>
+<h2 id="Timeout-Locking"><a href="#Timeout-Locking" class="headerlink" title="Timeout Locking"></a>Timeout Locking</h2><ul>
+<li>ReentrantLock supports locking with a timeout using <code>tryLock</code>.</li>
+</ul>
+<h2 id="Fair-Locks"><a href="#Fair-Locks" class="headerlink" title="Fair Locks"></a>Fair Locks</h2><ul>
+<li>Can be created using <code>ReentrantLock</code> for fair scheduling.</li>
+<li>Guarantees a first-come-first-served order.</li>
+</ul>
+<h2 id="Condition-Variables"><a href="#Condition-Variables" class="headerlink" title="Condition Variables"></a>Condition Variables</h2><ul>
+<li>Used for finer-grained thread synchronization.</li>
+<li>Multiple conditions can be created for different aspects of synchronization.</li>
+</ul>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example:"></a>Example:</h2><pre><code class="java">ReentrantLock lock = new ReentrantLock();
+Condition condition1 = lock.newCondition();
+Condition condition2 = lock.newCondition();
+
+lock.lock();
+try &#123;
+    condition1.await();
+    // ...
+    condition2.signal();
+&#125; finally &#123;
+    lock.unlock();
+&#125;
+</code></pre>
+
+      
+    </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/05/03/JavaConcurrency1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Processes and Threads
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/05/03/JavaConcurrency5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Thread-Safe Collection Classes</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/NET/">.NET (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/NGINX/">NGINX (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Dynamics-NAV/">Dynamics NAV (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (3)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Hexo/">Hexo (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag"><i class='fa fa-tags'></i>C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag"><i class='fa fa-tags'></i>Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL-Server-Architecture/" rel="tag"><i class='fa fa-tags'></i>MySQL Server Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL1/" rel="tag"><i class='fa fa-tags'></i>MySQL1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL2/" rel="tag"><i class='fa fa-tags'></i>MySQL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAV/" rel="tag"><i class='fa fa-tags'></i>NAV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/" rel="tag"><i class='fa fa-tags'></i>Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Resources/" rel="tag"><i class='fa fa-tags'></i>Resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/" rel="tag"><i class='fa fa-tags'></i>Visual Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Development/" rel="tag"><i class='fa fa-tags'></i>Web Development</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+
+
+<!-- BEGIN FEATURED POSTS -->                            
+<h2>Featured Posts</h2>
+<div class="recent-news margin-bottom-10">
+  
+    
+      <div class="row margin-bottom-10">
+	<div class="col-md-4">
+	  <img src="https://s3.amazonaws.com/ptsteadman-images/vs.jpg" class="img-responsive ">
+	</div>
+	<div class="col-md-8">
+	  <h3><a href="http://example.com/2015/03/23/2015-03-23-Make-VS-Insert-Spaces/">Spaces for Newline Indents in VS</a></h3>
+	</div>                        
+      </div>
+    
+  
+    
+      <div class="row margin-bottom-10">
+	<div class="col-md-4">
+	  <img src="https://s3.amazonaws.com/ptsteadman-images/helloworld.jpg" class="img-responsive ">
+	</div>
+	<div class="col-md-8">
+	  <h3><a href="http://example.com/2014/02/23/2014-02-23-hello-world/">Database indexing</a></h3>
+	</div>                        
+      </div>
+    
+  
+    
+      <div class="row margin-bottom-10">
+	<div class="col-md-4">
+	  <img src="https://s3.amazonaws.com/ptsteadman-images/nginx-proxy.png" class="img-responsive ">
+	</div>
+	<div class="col-md-8">
+	  <h3><a href="http://example.com/2015/04/01/2015-04-01-NGINX-Static-Locations/">Static NGINX1 Locations</a></h3>
+	</div>                        
+      </div>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+</div>
+<!-- END FEATURED POSTS -->                            
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN BOTTOM ABOUT BLOCK -->
+          <div class="col-md-4 col-sm-6 pre-footer-col">
+            <h2>About Us</h2>
+            <p>Computer Lab is a software development and marketing company based in Brooklyn, New York. <br><br> Computer Lab was founded in 2015, and is focused on so on and so forth.</p>
+          </div>
+          <!-- END BOTTOM ABOUT BLOCK -->
+
+          <!-- BEGIN BOTTOM CONTACTS -->
+          <div class="col-md-4 col-sm-6 pre-footer-col">
+            <h2>Contact</h2>
+            <address class="margin-bottom-40">
+              140 Metropolitan Avenue<br>
+              5th Floor<br>
+              Brooklyn, NY 11249<br>
+              Phone: 716-472-4484<br>
+              Email: <a href="mailto:ptsteadman@gmail.com">ptsteadman@gmail.com</a><br>
+            </address>
+          </div>
+          <!-- END BOTTOM CONTACTS -->
+
+	
+          <!-- BEGIN TWITTER BLOCK --> 
+          <div class="col-md-4 col-sm-6 pre-footer-col">
+
+	  <a data-tweet-limit="1" class="twitter-timeline" data-theme="dark"
+	  target="_blank" rel="noopener" href="https://twitter.com/computerlab_">Tweets by @computerlab_</a>
+
+	  <script>!function(d,s,id){var
+	  js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+          </div>
+          <!-- END TWITTER BLOCK -->
+	
+        </div>
+      </div>
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2023 Hexo<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/ptsteadman"><i class="fa fa-github"></i></a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/ptsteadman"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://www.facebook.com/ptsteadman"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://linkedin.com/in/ptsteadman"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a target="_blank" rel="noopener" href="http://stackoverflow.com/users/2480493/patrick-steadman"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+
+<![endif]--> 
+
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+
+
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+
+
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+
+
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+
+
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+
+
+<script src="/js/wow.min.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <title>Change Buffer | Hexo</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="description" content="InnoDB has a strategic approach when it comes to updating a data page.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Change Buffer">
+<meta property="og:url" content="http://example.com/2023/05/03/blog5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="InnoDB has a strategic approach when it comes to updating a data page.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-03T04:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-07T01:59:35.282Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+    
+  <meta content="{{ title }}" name="description">
+  <meta content="{{ title }}" name="keywords">
+  <meta content="{{ title }}" name="author">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+
+  <!-- Global styles START -->   
+  
+<link rel="stylesheet" href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css">
+
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  
+<link rel="stylesheet" href="/metronic/assets/pages/css/animate.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/plugins/owl.carousel/assets/owl.carousel.css">
+
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  
+<link rel="stylesheet" href="/metronic/assets/pages/css/components.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/pages/css/slider.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/corporate/css/style.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/pages/css/portfolio.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/corporate/css/style-responsive.css">
+
+  
+<link rel="stylesheet" href="/metronic/assets/corporate/css/themes/red.css">
+
+  
+<link rel="stylesheet" href="/css/theme-styles.css">
+
+  <!-- Theme styles END -->
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="corporate">
+  <!-- BEGIN TOP BAR -->
+<div class="pre-header">
+  <div class="container">
+    <div class="row">
+      <!-- BEGIN TOP BAR LEFT PART -->
+      <div class="col-md-6 col-sm-6 col-xs-9 additional-shop-info">
+	<ul class="list-unstyled list-inline">
+	  <li><i class="fa fa-phone"></i><span>716-472-4484</span></li>
+	  <li><i class="fa fa-envelope-o"></i><span>ptsteadman@gmail.com</span></li>
+	</ul>
+      </div>
+      <!-- END TOP BAR LEFT PART -->
+      <!-- BEGIN TOP BAR MENU -->
+      <div class="col-md-6 col-sm-6 col-xs-3 additional-nav">
+	<ul class="list-unstyled list-inline pull-right">
+	  <li><a href="/login">Log In</a></li>
+	</ul>
+      </div>
+      <!-- END TOP BAR MENU -->
+    </div>
+  </div>        
+</div>
+<!-- END TOP BAR -->
+<!-- BEGIN HEADER -->
+<div class="header">
+  <div class="container">
+    <!--<a class="site-logo" href="/" id="logo">Hexo</a>-->
+
+    <a class="site-logo" href="/">
+      <img src="/metronic/assets/corporate/img/logos/logo-corp-red.png" alt="Metronic FrontEnd">
+    </a>
+
+    <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+    <!-- BEGIN NAVIGATION -->
+    <div class="header-navigation pull-right font-transform-inherit">
+      <ul>
+	
+	<li class="">
+	  <a  href="/">Home</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/projects/">Projects</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/archives/">Blog</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/contact/">Contact</a>
+	</li>
+	
+	<li class="">
+	  <a  href="/about/">About</a>
+	</li>
+	
+	<!-- BEGIN TOP SEARCH -->
+	<li class="menu-search">
+	  <span class="sep"></span>
+	  <i class="fa fa-search search-btn"></i>
+	  <div class="search-box">
+	    <form action="#">
+	      <div class="input-group">
+		<input type="text" placeholder="Search" class="form-control st-default-search-input">
+		<span class="input-group-btn">
+		  <button class="btn btn-primary" type="submit">Search</button>
+		</span>
+	      </div>
+	    </form>
+	  </div> 
+	</li>
+	<!-- END TOP SEARCH -->
+      </ul>
+    </div>
+    <!-- END NAVIGATION -->
+  </div>
+</div>
+<!-- Header END -->
+
+  <div class="container">
+  <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/archives/">Blog</a></li>
+    <li class="active">Post</li>
+  </ul>
+  <section id="main">
+    
+    <h2 itemprop="name">
+      <a class="article-title" href="/2023/05/03/blog5/">Change Buffer</a>
+    </h2>
+
+
+    <div class="row">
+<div class="col-md-9 col-sm-9 blog-posts">
+<article id="post-blog5" class="article article-type-post blog-item" itemscope itemprop="blogPost">
+  <div class="article-meta">
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      <ul class="blog-info">
+	<li><i class="fa fa-user"></i> Anonymous</li>
+	<li><i class="fa fa-calendar"></i>
+	  <time datetime="2023-05-03T04:00:00.000Z" itemprop="datePublished">2023/05/03</time>
+
+	</li>
+	<li class="hidden-xs"><i class="fa fa-comments"></i>
+	  <a href="http://example.com/2023/05/03/blog5/#disqus_thread" class="article-comment-link">Comments</a>
+	</li>
+	<li class="hidden-xs"><i class="fa fa-tags"></i> 
+	  
+  
+    <a href="/tags/MySQL/" title="MySQL">MySQL</a>
+  
+
+
+	</li>
+      </ul>
+      
+  <div class="article-category">
+    
+    Category: 
+    
+    Categories:
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+  <br>
+
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>InnoDB has a strategic approach when it comes to updating a data page.</p>
+<span id="more"></span>
+
+<h1 id="Understanding-InnoDB’s-Change-Buffer"><a href="#Understanding-InnoDB’s-Change-Buffer" class="headerlink" title="Understanding InnoDB’s Change Buffer"></a>Understanding InnoDB’s Change Buffer</h1><p>InnoDB has a strategic approach when it comes to updating a data page:</p>
+<ol>
+<li>If the data page is already in memory, it updates directly in the memory.</li>
+<li>If the data page isn’t in memory, and the update doesn’t violate data consistency, then InnoDB caches this update in the <code>change buffer</code>. This means it doesn’t have to fetch the data page from the disk right away. When the data page is accessed later, it’s loaded into memory, and the operations from the <code>change buffer</code> associated with this page are executed. This ensures the correct logic of the data.</li>
+</ol>
+<p>Although it’s named <code>change buffer</code>, it’s a persistent kind of data, meaning it can be written to disk. It should be noted that any update operation must first verify whether it violates the unique constraint. This check requires loading the data page into memory. If the data is already loaded, updating directly in memory is faster, so there’s no need to use the <code>change buffer</code>. Hence, only non-unique indexes can utilize the <code>change buffer</code>.</p>
+<p>The size of the <code>change buffer</code> can be dynamically adjusted using the <code>innodb_change_buffer_max_size</code> parameter. Random I&#x2F;O access, especially when data is read from the disk into memory, is among the most expensive operations in databases. The <code>change buffer</code> can significantly improve update performance by reducing these random disk accesses.</p>
+<h2 id="When-to-Use-the-Change-Buffer"><a href="#When-to-Use-the-Change-Buffer" class="headerlink" title="When to Use the Change Buffer"></a>When to Use the Change Buffer</h2><p>The primary purpose of the <code>change buffer</code> is to cache record changes. The more changes to a page it caches before merging, the greater the benefit. This makes the <code>change buffer</code> especially useful for scenarios where writes are frequent, but reads are infrequent.</p>
+<p>However, if an application’s update pattern involves querying immediately after a write, even if the update is initially logged in the <code>change buffer</code>, the subsequent immediate access to this data page would trigger a merge. This doesn’t reduce the number of random I&#x2F;O accesses and adds the overhead of maintaining the <code>change buffer</code>.</p>
+<h2 id="Optimizer-Logic-in-Databases"><a href="#Optimizer-Logic-in-Databases" class="headerlink" title="Optimizer Logic in Databases"></a>Optimizer Logic in Databases</h2><p>The goal of an optimizer when selecting an index is to find the most efficient execution plan and minimize the execution cost. One of the factors that influence this cost is the number of rows scanned. Fewer rows scanned means fewer disk accesses and less CPU consumption.</p>
+<p>MySQL can’t precisely determine the number of rows that satisfy a condition before executing a statement. It relies on statistical data, specifically the “cardinality” of an index, which refers to the number of distinct values in it. A higher cardinality indicates a better distinguishing capacity for the index.</p>
+<p>InnoDB will typically sample a set of data pages to estimate the distinct values, get an average, and then multiply by the total number of pages in the index to determine the index’s cardinality. As tables get updated, the statistical data also changes. When the number of modified rows exceeds 1&#x2F;M of the total, it triggers a re-evaluation of the index statistics.</p>
+<p>In MySQL, there are two ways to store index statistics, which can be determined by the <code>innodb_stats_persistent</code> setting:</p>
+<ul>
+<li>When set to <code>on</code>, the statistics are persisted. By default, N is 20, and M is 10.</li>
+<li>When set to <code>off</code>, the statistics are only in memory. Here, N is 8, and M is 16.</li>
+</ul>
+<p>Sometimes, MySQL might choose the wrong index because it fails to accurately estimate the rows to be scanned.</p>
+<h2 id="Index-Selection-Issues-and-Solutions"><a href="#Index-Selection-Issues-and-Solutions" class="headerlink" title="Index Selection Issues and Solutions"></a>Index Selection Issues and Solutions</h2><ul>
+<li><p><strong>Force Index:</strong></p>
+<ul>
+<li>Use the <code>force index</code> directive to explicitly choose a particular index.</li>
+</ul>
+</li>
+<li><p><strong>SQL Statement Modification:</strong></p>
+<ul>
+<li>Adjust your SQL statement to guide MySQL into using the desired index.</li>
+</ul>
+</li>
+<li><p><strong>Manage Indices:</strong></p>
+<ul>
+<li>Create a new, more appropriate index.</li>
+<li>Delete any misused index.</li>
+</ul>
+</li>
+<li><p><strong>Prefix Indexing on Strings:</strong></p>
+<ul>
+<li>Implement prefix indexing for string columns to save space and query costs, while sacrificing the benefits of covering indexes.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Buffer-Management-and-Flushing-Strategies-in-InnoDB"><a href="#Buffer-Management-and-Flushing-Strategies-in-InnoDB" class="headerlink" title="Buffer Management and Flushing Strategies in InnoDB"></a>Buffer Management and Flushing Strategies in InnoDB</h2><h3 id="Dirty-Pages"><a href="#Dirty-Pages" class="headerlink" title="Dirty Pages"></a>Dirty Pages</h3><ul>
+<li>Dirty pages arise when the contents of memory pages differ from disk pages.</li>
+<li>Writing the contents of these memory pages to disk makes them “clean”.</li>
+<li>The process of writing these pages to disk is termed <code>flushing</code>.</li>
+</ul>
+<h3 id="Triggers-for-Flushing"><a href="#Triggers-for-Flushing" class="headerlink" title="Triggers for Flushing"></a>Triggers for Flushing</h3><ol>
+<li><p><strong>Redo Log is Full:</strong></p>
+<ul>
+<li>System halts all update operations and advances the checkpoint to free up space in the redo log.</li>
+</ul>
+</li>
+<li><p><strong>System Memory is Insufficient:</strong></p>
+<ul>
+<li>New memory pages are needed. If evicting a dirty page, it must be flushed to disk.</li>
+</ul>
+</li>
+<li><p><strong>MySQL System is Idle.</strong></p>
+</li>
+<li><p><strong>MySQL Shutdown:</strong></p>
+<ul>
+<li>All dirty pages are flushed to ensure a quick startup next time.</li>
+</ul>
+</li>
+</ol>
+<h3 id="Buffer-Pool"><a href="#Buffer-Pool" class="headerlink" title="Buffer Pool"></a>Buffer Pool</h3><ul>
+<li>InnoDB manages memory using a buffer pool.</li>
+<li>Pages within the buffer pool can be:<ol>
+<li>Unused.</li>
+<li>Used and clean.</li>
+<li>Used and dirty.</li>
+</ol>
+</li>
+</ul>
+<h3 id="InnoDB’s-Flushing-Strategy"><a href="#InnoDB’s-Flushing-Strategy" class="headerlink" title="InnoDB’s Flushing Strategy"></a>InnoDB’s Flushing Strategy</h3><ul>
+<li>Inform InnoDB about the IO capacity of the host to determine how fast dirty pages can be flushed.</li>
+<li><code>innodb_io_capacity</code> informs InnoDB of the disk’s capabilities. This value is often set to the disk’s IOPS.</li>
+<li>Flushing speed depends on two factors:<ol>
+<li>The proportion of dirty pages.</li>
+<li>Redo log write speed.</li>
+</ol>
+</li>
+</ul>
+<h3 id="Optimizations"><a href="#Optimizations" class="headerlink" title="Optimizations"></a>Optimizations</h3><ul>
+<li><code>innodb_flush_neighbors</code>: Determines whether to flush “neighboring” dirty pages when flushing a particular dirty page.<ul>
+<li><code>1</code>: Enables the “guilt by association” behavior.</li>
+<li><code>0</code>: Each page is flushed independently.</li>
+<li>This optimization was crucial in the era of mechanical hard drives to minimize random IO. However, for high IOPS devices like SSDs, it’s often better to set this value to <code>0</code> to reduce SQL statement response times.</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/05/03/blog4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MySQL Locking Mechanisms
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/05/03/blog6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Database Table Space Reclamation</div>
+    </a>
+  
+</nav>
+
+  
+  <br>
+</article>
+
+
+
+
+</div>
+<div class="col-md-3 col-sm-3 blog-sidebar">
+  <!-- CATEGORIES START -->
+<h2 class="no-top-space">Categories</h2>
+
+<div class="widget-wrap">
+  <div class="widget">
+    <ul class="nav sidebar-categories margin-bottom-40">
+      
+	<li>
+	  <a href="/categories/NET/">.NET (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/MySQL/">MySQL (13)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/NGINX/">NGINX (1)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Dynamics-NAV/">Dynamics NAV (2)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Java/">Java (3)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Hexo/">Hexo (1)</a>
+	</li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<!-- CATEGORIES END -->
+
+<!-- BEGIN BLOG TAGS -->
+<div class="blog-tags margin-bottom-20">
+  <h2>Tags</h2>
+  
+  <div class="widget-wrap">
+    <div class="widget">
+      
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag"><i class='fa fa-tags'></i>C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag"><i class='fa fa-tags'></i>Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL-Server-Architecture/" rel="tag"><i class='fa fa-tags'></i>MySQL Server Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL1/" rel="tag"><i class='fa fa-tags'></i>MySQL1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL2/" rel="tag"><i class='fa fa-tags'></i>MySQL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAV/" rel="tag"><i class='fa fa-tags'></i>NAV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/" rel="tag"><i class='fa fa-tags'></i>Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Resources/" rel="tag"><i class='fa fa-tags'></i>Resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/" rel="tag"><i class='fa fa-tags'></i>Visual Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Development/" rel="tag"><i class='fa fa-tags'></i>Web Development</a></li></ul>
+    </div>
+  </div>
+
+
+</div>
+<!-- END BLOG TAGS -->
+
+
+<!-- BEGIN FEATURED POSTS -->                            
+<h2>Featured Posts</h2>
+<div class="recent-news margin-bottom-10">
+  
+    
+      <div class="row margin-bottom-10">
+	<div class="col-md-4">
+	  <img src="https://s3.amazonaws.com/ptsteadman-images/vs.jpg" class="img-responsive ">
+	</div>
+	<div class="col-md-8">
+	  <h3><a href="http://example.com/2015/03/23/2015-03-23-Make-VS-Insert-Spaces/">Spaces for Newline Indents in VS</a></h3>
+	</div>                        
+      </div>
+    
+  
+    
+      <div class="row margin-bottom-10">
+	<div class="col-md-4">
+	  <img src="https://s3.amazonaws.com/ptsteadman-images/helloworld.jpg" class="img-responsive ">
+	</div>
+	<div class="col-md-8">
+	  <h3><a href="http://example.com/2014/02/23/2014-02-23-hello-world/">Database indexing</a></h3>
+	</div>                        
+      </div>
+    
+  
+    
+      <div class="row margin-bottom-10">
+	<div class="col-md-4">
+	  <img src="https://s3.amazonaws.com/ptsteadman-images/nginx-proxy.png" class="img-responsive ">
+	</div>
+	<div class="col-md-8">
+	  <h3><a href="http://example.com/2015/04/01/2015-04-01-NGINX-Static-Locations/">Static NGINX1 Locations</a></h3>
+	</div>                        
+      </div>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+</div>
+<!-- END FEATURED POSTS -->                            
+
+</div>
+</div>
+
+  </section>
+</div>
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN BOTTOM ABOUT BLOCK -->
+          <div class="col-md-4 col-sm-6 pre-footer-col">
+            <h2>About Us</h2>
+            <p>Computer Lab is a software development and marketing company based in Brooklyn, New York. <br><br> Computer Lab was founded in 2015, and is focused on so on and so forth.</p>
+          </div>
+          <!-- END BOTTOM ABOUT BLOCK -->
+
+          <!-- BEGIN BOTTOM CONTACTS -->
+          <div class="col-md-4 col-sm-6 pre-footer-col">
+            <h2>Contact</h2>
+            <address class="margin-bottom-40">
+              140 Metropolitan Avenue<br>
+              5th Floor<br>
+              Brooklyn, NY 11249<br>
+              Phone: 716-472-4484<br>
+              Email: <a href="mailto:ptsteadman@gmail.com">ptsteadman@gmail.com</a><br>
+            </address>
+          </div>
+          <!-- END BOTTOM CONTACTS -->
+
+	
+          <!-- BEGIN TWITTER BLOCK --> 
+          <div class="col-md-4 col-sm-6 pre-footer-col">
+
+	  <a data-tweet-limit="1" class="twitter-timeline" data-theme="dark"
+	  target="_blank" rel="noopener" href="https://twitter.com/computerlab_">Tweets by @computerlab_</a>
+
+	  <script>!function(d,s,id){var
+	  js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+          </div>
+          <!-- END TWITTER BLOCK -->
+	
+        </div>
+      </div>
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+                  &copy; 2023 Hexo<br>
+ <a href="javascript:;">Privacy Policy</a> | <a href="javascript:;">Terms of Service</a>
+          </div>
+          <!-- END COPYRIGHT -->
+	  <!-- BEGIN SOCIAL -->
+<div class="col-md-6 col-sm-6">
+  <ul class="social-footer list-unstyled list-inline pull-right">
+    
+      <li><a target="_blank" rel="noopener" href="https://github.com/ptsteadman"><i class="fa fa-github"></i></a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://twitter.com/ptsteadman"><i class="fa fa-twitter"></i></a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://www.facebook.com/ptsteadman"><i class="fa fa-facebook"></i></a></li>
+    
+      <li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li>
+    
+      <li><a target="_blank" rel="noopener" href="https://linkedin.com/in/ptsteadman"><i class="fa fa-linkedin"></i></a></li>
+    
+      <li><a target="_blank" rel="noopener" href="http://stackoverflow.com/users/2480493/patrick-steadman"><i class="fa fa-stackoverflow"></i></a></li>
+    
+  </ul>  
+</div>
+<!-- END SOCIAL -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+  <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+
+<script src="/metronic/assets/plugins/respond.min.js"></script>
+
+<![endif]--> 
+
+<script src="/metronic/assets/plugins/jquery.min.js"></script>
+
+
+<script src="/metronic/assets/plugins/jquery-migrate.min.js"></script>
+
+
+<script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<script src="/metronic/assets/corporate/scripts/back-to-top.js"></script>
+
+
+<script src="/metronic/assets/plugins/owl.carousel/owl.carousel.min.js"></script>
+
+
+<script src="/metronic/assets/corporate/scripts/layout.js"></script>
+
+
+<script src="/js/wow.min.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        Layout.init();    
+        Layout.initOWL();
+        Layout.initTwitter();
+        Layout.initFixHeaderWithPreHeader(); /* Switch On Header Fixing (only if you have pre-header) */
+        Layout.initNavScrolling(); 
+	new WOW().init();
+    });
+</script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE-SPECIFIC PLUGINS --> 
+
+
+
+
+
+
+
+<!-- END PAGE-SPECIFIC PLUGINS --> 
+
+<!-- BEGIN INTEGRATIONS -->
+
+
+
+
+
+<!-- END INTEGRATIONS -->
+
+</body>
+</html>

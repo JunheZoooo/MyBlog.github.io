@@ -7,23 +7,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Welcome To Hexo | Hexo</title>
+  <title>Database indexing | Hexo</title>
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="Database IndexingIntroductionDatabase indexing increases the efficiency of data retrieval, much like the table of contents in a book. Common Indexing Models Hash Table:  A structure that stores data i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Welcome To Hexo">
+<meta property="og:title" content="Database indexing">
 <meta property="og:url" content="http://example.com/2014/02/23/2014-02-23-hello-world/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Database IndexingIntroductionDatabase indexing increases the efficiency of data retrieval, much like the table of contents in a book. Common Indexing Models Hash Table:  A structure that stores data i">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2014-02-23T05:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-06T02:05:49.559Z">
+<meta property="article:modified_time" content="2023-09-07T00:38:06.743Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="Welcome">
-<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="MySQL1">
+<meta property="article:tag" content="MySQL2">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -172,7 +172,7 @@
   <section id="main">
     
     <h2 itemprop="name">
-      <a class="article-title" href="/2014/02/23/2014-02-23-hello-world/">Welcome To Hexo</a>
+      <a class="article-title" href="/2014/02/23/2014-02-23-hello-world/">Database indexing</a>
     </h2>
 
 
@@ -197,9 +197,9 @@
 	<li class="hidden-xs"><i class="fa fa-tags"></i> 
 	  
   
-    <a href="/tags/Welcome/" title="Welcome">Welcome</a>,
+    <a href="/tags/MySQL1/" title="MySQL1">MySQL1</a>,
   
-    <a href="/tags/How-To/" title="How-To">How-To</a>
+    <a href="/tags/MySQL2/" title="MySQL2">MySQL2</a>
   
 
 
@@ -211,7 +211,7 @@
     Category: 
     
     Categories:
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
   </div>
   <br>
 
@@ -220,8 +220,55 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="Database-Indexing"><a href="#Database-Indexing" class="headerlink" title="Database Indexing"></a>Database Indexing</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Database indexing increases the efficiency of data retrieval, much like the table of contents in a book.</p>
+<h2 id="Common-Indexing-Models"><a href="#Common-Indexing-Models" class="headerlink" title="Common Indexing Models"></a>Common Indexing Models</h2><ul>
+<li><p><strong>Hash Table</strong>:</p>
+<ul>
+<li>A structure that stores data in a key-value format.</li>
+<li>Suitable for scenarios that require only equality searches.</li>
+</ul>
+</li>
+<li><p><strong>Ordered Array</strong>:</p>
+<ul>
+<li>Outstanding for both equality and range queries.</li>
+<li>Inefficient for data updates.</li>
+<li>Ideal for static storage, like storing a city’s population data for a specific year.</li>
+</ul>
+</li>
+<li><p><strong>Search Tree</strong>:</p>
+<ul>
+<li>InnoDB tables are stored in index form based on the primary key order. This is known as index-organized tables.</li>
+<li>InnoDB uses the B+ tree index model, so data is stored in B+ trees.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Types-of-Indexes"><a href="#Types-of-Indexes" class="headerlink" title="Types of Indexes"></a>Types of Indexes</h2><ol>
+<li><p><strong>Primary Key Index (Clustered Index)</strong>:</p>
+<ul>
+<li>The leaf nodes store the entire row of data.</li>
+</ul>
+</li>
+<li><p><strong>Secondary Index</strong>:</p>
+<ul>
+<li>The leaf nodes contain the values of the primary key.</li>
+<li>For InnoDB, non-primary indexes are also called secondary indexes.</li>
+</ul>
+</li>
+</ol>
+<h2 id="Insights"><a href="#Insights" class="headerlink" title="Insights"></a>Insights</h2><ul>
+<li>Queries using the primary key index only need to search the primary key’s B+ tree.</li>
+<li>Queries using the secondary index need to first search the secondary index tree to get the primary key’s value, then search the primary key’s B+ tree. This process is called “backtable”.</li>
+</ul>
+<h3 id="Index-Maintenance"><a href="#Index-Maintenance" class="headerlink" title="Index Maintenance"></a>Index Maintenance</h3><ul>
+<li>B+ trees need maintenance to preserve their order.</li>
+<li>Inserting a new value might trigger a “page split” if the data page is full.</li>
+<li>Using an auto-increment primary key is often the most logical choice, both from a performance and storage perspective.</li>
+</ul>
+<h2 id="Additional-Tips"><a href="#Additional-Tips" class="headerlink" title="Additional Tips"></a>Additional Tips</h2><ul>
+<li>Use “covering indexes” to reduce the number of tree searches, which improves query performance.</li>
+<li>Index pushdown optimization, introduced in MySQL 5.6, filters records during index traversal to reduce the number of backtables.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
 
@@ -272,11 +319,11 @@
     <ul class="nav sidebar-categories margin-bottom-40">
       
 	<li>
-	  <a href="/categories/Hexo/">Hexo (2)</a>
+	  <a href="/categories/NET/">.NET (1)</a>
 	</li>
       
 	<li>
-	  <a href="/categories/NET/">.NET (1)</a>
+	  <a href="/categories/MySQL/">MySQL (13)</a>
 	</li>
       
 	<li>
@@ -288,7 +335,11 @@
 	</li>
       
 	<li>
-	  <a href="/categories/Humor/">Humor (1)</a>
+	  <a href="/categories/Java/">Java (3)</a>
+	</li>
+      
+	<li>
+	  <a href="/categories/Hexo/">Hexo (1)</a>
 	</li>
       
     </ul>
@@ -305,7 +356,7 @@
   <div class="widget-wrap">
     <div class="widget">
       
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag"><i class='fa fa-tags'></i>C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag"><i class='fa fa-tags'></i>Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/How-To/" rel="tag"><i class='fa fa-tags'></i>How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL-Server-Architecture/" rel="tag"><i class='fa fa-tags'></i>MySQL Server Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAV/" rel="tag"><i class='fa fa-tags'></i>NAV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/" rel="tag"><i class='fa fa-tags'></i>Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Resources/" rel="tag"><i class='fa fa-tags'></i>Resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/" rel="tag"><i class='fa fa-tags'></i>Visual Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Development/" rel="tag"><i class='fa fa-tags'></i>Web Development</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Welcome/" rel="tag"><i class='fa fa-tags'></i>Welcome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/employment/" rel="tag"><i class='fa fa-tags'></i>employment</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/funny/" rel="tag"><i class='fa fa-tags'></i>funny</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag"><i class='fa fa-tags'></i>C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag"><i class='fa fa-tags'></i>Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag"><i class='fa fa-tags'></i>Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag"><i class='fa fa-tags'></i>MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL-Server-Architecture/" rel="tag"><i class='fa fa-tags'></i>MySQL Server Architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL1/" rel="tag"><i class='fa fa-tags'></i>MySQL1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL2/" rel="tag"><i class='fa fa-tags'></i>MySQL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAV/" rel="tag"><i class='fa fa-tags'></i>NAV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/" rel="tag"><i class='fa fa-tags'></i>Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Resources/" rel="tag"><i class='fa fa-tags'></i>Resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/" rel="tag"><i class='fa fa-tags'></i>Visual Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Development/" rel="tag"><i class='fa fa-tags'></i>Web Development</a></li></ul>
     </div>
   </div>
 
@@ -321,17 +372,6 @@
     
       <div class="row margin-bottom-10">
 	<div class="col-md-4">
-	  <img src="https://s3.amazonaws.com/ptsteadman-images/helloworld.jpg" class="img-responsive ">
-	</div>
-	<div class="col-md-8">
-	  <h3><a href="http://example.com/2014/02/23/2014-02-23-hello-world/">Welcome To Hexo</a></h3>
-	</div>                        
-      </div>
-    
-  
-    
-      <div class="row margin-bottom-10">
-	<div class="col-md-4">
 	  <img src="https://s3.amazonaws.com/ptsteadman-images/vs.jpg" class="img-responsive ">
 	</div>
 	<div class="col-md-8">
@@ -343,12 +383,49 @@
     
       <div class="row margin-bottom-10">
 	<div class="col-md-4">
+	  <img src="https://s3.amazonaws.com/ptsteadman-images/helloworld.jpg" class="img-responsive ">
+	</div>
+	<div class="col-md-8">
+	  <h3><a href="http://example.com/2014/02/23/2014-02-23-hello-world/">Database indexing</a></h3>
+	</div>                        
+      </div>
+    
+  
+    
+      <div class="row margin-bottom-10">
+	<div class="col-md-4">
 	  <img src="https://s3.amazonaws.com/ptsteadman-images/nginx-proxy.png" class="img-responsive ">
 	</div>
 	<div class="col-md-8">
-	  <h3><a href="http://example.com/2015/04/01/2015-04-01-NGINX-Static-Locations/">Static NGINX Locations</a></h3>
+	  <h3><a href="http://example.com/2015/04/01/2015-04-01-NGINX-Static-Locations/">Static NGINX1 Locations</a></h3>
 	</div>                        
       </div>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
     
   
     
