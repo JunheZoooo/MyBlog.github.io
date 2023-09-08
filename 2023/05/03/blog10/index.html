@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Temporarily Enhancing MySQL Performance | Junhe(Ivy) Zou</title><meta name="author" content="Junhe(Ivy) Zou"><meta name="copyright" content="Junhe(Ivy) Zou"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="In a normal short connection mode, once connected to the database, only a few SQL statements are executed before the connection is severed. The connection is re-established when needed. During peak ti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Temporarily Enhancing MySQL Performance">
+<meta property="og:url" content="https://junhezoooo.github.io/MyBlog.github.io/2023/05/03/blog10/index.html">
+<meta property="og:site_name" content="Junhe(Ivy) Zou">
+<meta property="og:description" content="In a normal short connection mode, once connected to the database, only a few SQL statements are executed before the connection is severed. The connection is re-established when needed. During peak ti">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80">
+<meta property="article:published_time" content="2023-05-03T04:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-07T02:15:59.288Z">
+<meta property="article:author" content="Junhe(Ivy) Zou">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80"><link rel="shortcut icon" href="/MyBlog.github.io/img/favicon.png"><link rel="canonical" href="https://junhezoooo.github.io/MyBlog.github.io/2023/05/03/blog10/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/MyBlog.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/MyBlog.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Temporarily Enhancing MySQL Performance',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-06 22:15:59'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1769&amp;q=80" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/MyBlog.github.io/archives/"><div class="headline">Articles</div><div class="length-num">23</div></a><a href="/MyBlog.github.io/tags/"><div class="headline">Tags</div><div class="length-num">12</div></a><a href="/MyBlog.github.io/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/MyBlog.github.io/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/MyBlog.github.io/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://x.imgs.ovh/x/2023/09/08/64fa761fdd6bc.jpeg')"><nav id="nav"><span id="blog-info"><a href="/MyBlog.github.io/" title="Junhe(Ivy) Zou"><span class="site-name">Junhe(Ivy) Zou</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/MyBlog.github.io/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/MyBlog.github.io/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Temporarily Enhancing MySQL Performance</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-05-03T04:00:00.000Z" title="Created 2023-05-03 00:00:00">2023-05-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-09-07T02:15:59.288Z" title="Updated 2023-09-06 22:15:59">2023-09-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/MyBlog.github.io/categories/MySQL/">MySQL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Temporarily Enhancing MySQL Performance"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>In a normal short connection mode, once connected to the database, only a few SQL statements are executed before the connection is severed. The connection is re-established when needed. During peak times in a short connection model, there could be a sudden spike in connections.</p>
+<span id="more"></span>
+
+<h1 id="Temporarily-Enhancing-MySQL-Performance"><a href="#Temporarily-Enhancing-MySQL-Performance" class="headerlink" title="Temporarily Enhancing MySQL Performance"></a>Temporarily Enhancing MySQL Performance</h1><p>In a normal short connection mode, once connected to the database, only a few SQL statements are executed before the connection is severed. The connection is re-established when needed. During peak times in a short connection model, there could be a sudden spike in connections.</p>
+<h2 id="Dangers-of-Short-Connection-Model"><a href="#Dangers-of-Short-Connection-Model" class="headerlink" title="Dangers of Short Connection Model"></a>Dangers of Short Connection Model</h2><ul>
+<li>The main risk is that if the database processing slows down slightly, connection numbers can surge.</li>
+<li>The <code>max_connections</code> parameter controls the upper limit of simultaneous connections to a MySQL instance. Exceeding this results in the system denying further connection requests with the error “Too many connections”. From a business perspective, this means the database is unavailable.</li>
+<li>Designing <code>max_connections</code> aims to protect MySQL. Increasing this parameter excessively could backfire, increasing system load with resources wasted on permissions checks.</li>
+</ul>
+<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><h3 id="1-Deal-with-Idle-Connections"><a href="#1-Deal-with-Idle-Connections" class="headerlink" title="1. Deal with Idle Connections"></a>1. Deal with Idle Connections</h3><p><code>max_connections</code> counts all connections, regardless of their activity. Unnecessary connections can be forcibly removed using <code>kill connection</code> or by setting <code>wait_timeout</code>. If connections are excessive, start by disconnecting those idle outside of transactions. If still necessary, consider disconnecting those idle within transactions.</p>
+<h3 id="2-Reduce-Connection-Overheads"><a href="#2-Reduce-Connection-Overheads" class="headerlink" title="2. Reduce Connection Overheads"></a>2. Reduce Connection Overheads</h3><p>Bypass the permissions check phase during the connection process. Restart the database using the <code>--skip-grant-tables</code> parameter. This allows MySQL to skip all permission checks during both connection and query execution phases.</p>
+<h2 id="Slow-Query-Performance-Issues"><a href="#Slow-Query-Performance-Issues" class="headerlink" title="Slow Query Performance Issues"></a>Slow Query Performance Issues</h2><p>In MySQL, performance issues due to slow queries can arise from:</p>
+<ol>
+<li>Poorly designed indices.</li>
+<li>Poorly written SQL statements.</li>
+<li>MySQL selecting the wrong index.</li>
+</ol>
+<h3 id="Solutions-1"><a href="#Solutions-1" class="headerlink" title="Solutions"></a>Solutions</h3><h4 id="1-Index-Design"><a href="#1-Index-Design" class="headerlink" title="1. Index Design"></a>1. Index Design</h4><p>From MySQL 5.6 onwards, index creation supports Online DDL. During peak times when a query has slowed the system, the most efficient solution is executing the <code>alter table</code> statement. Ideally, execute this on a backup. For a one-primary-one-backup system (primary <code>A</code>, backup <code>B</code>):</p>
+<ul>
+<li>On backup <code>B</code>, execute <code>set sql_log_bin=off</code> (not writing binlog) and then execute <code>alter table</code> to add an index.</li>
+<li>Execute primary-backup switching.</li>
+<li>Now, primary is <code>B</code> and backup is <code>A</code>. On <code>A</code>, execute <code>set sql_log_bin=off</code> and then execute <code>alter table</code> to add an index.</li>
+</ul>
+<h4 id="2-Incorrect-Index-Selection"><a href="#2-Incorrect-Index-Selection" class="headerlink" title="2. Incorrect Index Selection"></a>2. Incorrect Index Selection</h4><p>The emergency solution is to use the <code>force index</code> for the statement.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://junhezoooo.github.io/MyBlog.github.io">Junhe(Ivy) Zou</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://junhezoooo.github.io/MyBlog.github.io/2023/05/03/blog10/">https://junhezoooo.github.io/MyBlog.github.io/2023/05/03/blog10/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/MyBlog.github.io/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1769&amp;q=80" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/MyBlog.github.io/2023/05/03/JavaConcurrency2/" title="Multithreading and Concurrency Concepts"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Multithreading and Concurrency Concepts</div></div></a></div><div class="next-post pull-right"><a href="/MyBlog.github.io/2023/05/03/blog11/" title="MySQL Logging Mechanism"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">MySQL Logging Mechanism</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/MyBlog.github.io/2023/05/03/blog11/" title="MySQL Logging Mechanism"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">MySQL Logging Mechanism</div></div></a></div><div><a href="/MyBlog.github.io/2023/05/03/blog13/" title="MySQL Parallel Replication Strategies"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">MySQL Parallel Replication Strategies</div></div></a></div><div><a href="/MyBlog.github.io/2023/05/03/blog12/" title="MySQL Master-Slave Replication Principles"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">MySQL Master-Slave Replication Principles</div></div></a></div><div><a href="/MyBlog.github.io/2023/05/03/blog15/" title="Data Recovery Methods"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">Data Recovery Methods</div></div></a></div><div><a href="/MyBlog.github.io/2023/05/03/blog4/" title="MySQL Locking Mechanisms"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">MySQL Locking Mechanisms</div></div></a></div><div><a href="/MyBlog.github.io/2023/05/03/blog14/" title="Master-Slave Switching Process"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">Master-Slave Switching Process</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1769&amp;q=80" onerror="this.onerror=null;this.src='/MyBlog.github.io/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Junhe(Ivy) Zou</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/MyBlog.github.io/archives/"><div class="headline">Articles</div><div class="length-num">23</div></a><a href="/MyBlog.github.io/tags/"><div class="headline">Tags</div><div class="length-num">12</div></a><a href="/MyBlog.github.io/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Temporarily-Enhancing-MySQL-Performance"><span class="toc-number">1.</span> <span class="toc-text">Temporarily Enhancing MySQL Performance</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Dangers-of-Short-Connection-Model"><span class="toc-number">1.1.</span> <span class="toc-text">Dangers of Short Connection Model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solutions"><span class="toc-number">1.2.</span> <span class="toc-text">Solutions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Deal-with-Idle-Connections"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. Deal with Idle Connections</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Reduce-Connection-Overheads"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. Reduce Connection Overheads</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Slow-Query-Performance-Issues"><span class="toc-number">1.3.</span> <span class="toc-text">Slow Query Performance Issues</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Solutions-1"><span class="toc-number">1.3.1.</span> <span class="toc-text">Solutions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Index-Design"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">1. Index Design</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Incorrect-Index-Selection"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">2. Incorrect Index Selection</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/MyBlog.github.io/2023/09/07/Hi/" title="Hi">Hi</a><time datetime="2023-09-07T04:04:57.000Z" title="Created 2023-09-07 00:04:57">2023-09-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/MyBlog.github.io/2023/08/01/JavaConcurrency5/" title="Thread-Safe Collection Classes">Thread-Safe Collection Classes</a><time datetime="2023-08-01T18:33:35.000Z" title="Created 2023-08-01 14:33:35">2023-08-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/MyBlog.github.io/2023/08/01/blog1/" title="MySQL Server Architecture?">MySQL Server Architecture?</a><time datetime="2023-08-01T18:33:35.000Z" title="Created 2023-08-01 14:33:35">2023-08-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/MyBlog.github.io/2023/05/03/JavaConcurrency1/" title="Processes and Threads">Processes and Threads</a><time datetime="2023-05-03T04:00:00.000Z" title="Created 2023-05-03 00:00:00">2023-05-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/MyBlog.github.io/2023/05/03/JavaConcurrency2/" title="Multithreading and Concurrency Concepts">Multithreading and Concurrency Concepts</a><time datetime="2023-05-03T04:00:00.000Z" title="Created 2023-05-03 00:00:00">2023-05-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Junhe(Ivy) Zou</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/MyBlog.github.io/js/utils.js"></script><script src="/MyBlog.github.io/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

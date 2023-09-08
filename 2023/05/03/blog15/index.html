@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Data Recovery Methods | Junhe(Ivy) Zou</title><meta name="author" content="Junhe(Ivy) Zou"><meta name="copyright" content="Junhe(Ivy) Zou"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Data Recovery MethodsRecovering Deleted RowsIf you accidentally delete data rows using a DELETE statement, you can recover the data using the Flashback tool. The Flashback tool works by modifying the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Recovery Methods">
+<meta property="og:url" content="https://junhezoooo.github.io/MyBlog.github.io/2023/05/03/blog15/index.html">
+<meta property="og:site_name" content="Junhe(Ivy) Zou">
+<meta property="og:description" content="Data Recovery MethodsRecovering Deleted RowsIf you accidentally delete data rows using a DELETE statement, you can recover the data using the Flashback tool. The Flashback tool works by modifying the">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80">
+<meta property="article:published_time" content="2023-05-03T04:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-07T02:36:09.395Z">
+<meta property="article:author" content="Junhe(Ivy) Zou">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80"><link rel="shortcut icon" href="/MyBlog.github.io/img/favicon.png"><link rel="canonical" href="https://junhezoooo.github.io/MyBlog.github.io/2023/05/03/blog15/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/MyBlog.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/MyBlog.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Data Recovery Methods',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-06 22:36:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1769&amp;q=80" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/MyBlog.github.io/archives/"><div class="headline">Articles</div><div class="length-num">23</div></a><a href="/MyBlog.github.io/tags/"><div class="headline">Tags</div><div class="length-num">12</div></a><a href="/MyBlog.github.io/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/MyBlog.github.io/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/MyBlog.github.io/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://x.imgs.ovh/x/2023/09/08/64fa761fdd6bc.jpeg')"><nav id="nav"><span id="blog-info"><a href="/MyBlog.github.io/" title="Junhe(Ivy) Zou"><span class="site-name">Junhe(Ivy) Zou</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/MyBlog.github.io/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/MyBlog.github.io/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/MyBlog.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Data Recovery Methods</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-05-03T04:00:00.000Z" title="Created 2023-05-03 00:00:00">2023-05-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-09-07T02:36:09.395Z" title="Updated 2023-09-06 22:36:09">2023-09-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/MyBlog.github.io/categories/MySQL/">MySQL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Data Recovery Methods"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><span id="more"></span>
+<h1 id="Data-Recovery-Methods"><a href="#Data-Recovery-Methods" class="headerlink" title="Data Recovery Methods"></a>Data Recovery Methods</h1><h2 id="Recovering-Deleted-Rows"><a href="#Recovering-Deleted-Rows" class="headerlink" title="Recovering Deleted Rows"></a>Recovering Deleted Rows</h2><p>If you accidentally delete data rows using a DELETE statement, you can recover the data using the Flashback tool. The Flashback tool works by modifying the contents of the binlog, allowing you to replay the data back into the original database. To use this method, ensure that <code>binlog_format</code> is set to <code>row</code> and <code>binlog_row_image</code> is set to <code>FULL</code>.</p>
+<p>When recovering individual transactions, follow these steps:</p>
+<ol>
+<li><p>For INSERT statements (Write_rows event in the binlog), change them to DELETE statements (Delete_rows event).</p>
+</li>
+<li><p>Similarly, for DELETE statements (Delete_rows event in the binlog), change them to INSERT statements (Write_rows event).</p>
+</li>
+<li><p>If the event is an Update_rows event, which records both the old and new values of the rows, swap the positions of these two rows.</p>
+</li>
+</ol>
+<h2 id="Recovering-Deleted-Databases-or-Tables"><a href="#Recovering-Deleted-Databases-or-Tables" class="headerlink" title="Recovering Deleted Databases or Tables"></a>Recovering Deleted Databases or Tables</h2><p>To recover data when an entire database or table is deleted, you’ll need to rely on full backups and incremental logs. This method assumes that you have regular full backups and real-time backups of binlogs.</p>
+<p>For instance, if someone deletes a database at 12 PM, follow these steps:</p>
+<ol>
+<li><p>Retrieve the latest full backup, assuming it’s taken daily at midnight.</p>
+</li>
+<li><p>Restore a temporary copy of the database from the backup.</p>
+</li>
+<li><p>Extract the binlog entries from after midnight.</p>
+</li>
+<li><p>Apply all these binlog entries, excluding the statements responsible for the accidental deletion, to the temporary copy.</p>
+</li>
+</ol>
+<h2 id="Recovering-from-rm-Data-Deletion"><a href="#Recovering-from-rm-Data-Deletion" class="headerlink" title="Recovering from rm Data Deletion"></a>Recovering from rm Data Deletion</h2><p>In a MySQL cluster with a high-availability mechanism, data deletion with <code>rm</code> isn’t a major concern. As long as it doesn’t destroy the entire cluster and only affects one node’s data, the HA system will elect a new master and ensure the cluster’s normal operation. Your task in such a scenario is to restore the data on the affected node and reintegrate it into the cluster.</p>
+<h2 id="Killing-a-Query-Thread"><a href="#Killing-a-Query-Thread" class="headerlink" title="Killing a Query Thread"></a>Killing a Query Thread</h2><p>When a user executes <code>KILL QUERY thread_id_B</code>, MySQL’s thread handling for the KILL command does two things:</p>
+<ol>
+<li><p>Changes the execution state of session B to THD::KILL_QUERY (sets the variable <code>killed</code> to THD::KILL_QUERY).</p>
+</li>
+<li><p>Sends a signal to the execution thread of session B.</p>
+</li>
+</ol>
+<h2 id="Impact-of-Full-Table-Scans-on-Server-Layer"><a href="#Impact-of-Full-Table-Scans-on-Server-Layer" class="headerlink" title="Impact of Full Table Scans on Server Layer"></a>Impact of Full Table Scans on Server Layer</h2><p>InnoDB stores data on the primary key index, making full table scans equivalent to scanning the primary key index of table <code>t</code>. Each row retrieved can be placed directly into the result set and sent to the client.</p>
+<p>The server doesn’t need to maintain a complete result set. Data retrieval and sending follow this process:</p>
+<ol>
+<li><p>Retrieve one row and write it to the <code>net_buffer</code>. The size of this memory block is defined by the <code>net_buffer_length</code> parameter, typically set to 16KB.</p>
+</li>
+<li><p>Keep retrieving rows until the <code>net_buffer</code> is full, then send it through the network interface.</p>
+</li>
+<li><p>If the send operation succeeds, clear the <code>net_buffer</code> and continue with the next row.</p>
+</li>
+<li><p>If the send function returns EAGAIN or WSAEWOULDBLOCK, indicating the local network stack’s send buffer is full, enter a wait state until the network stack becomes writable again, then resume sending.</p>
+</li>
+</ol>
+<p>MySQL operates in a “read and send” manner, which means that if the client is slow to receive, it can prolong the execution time of a transaction.</p>
+<h2 id="Impact-of-Full-Table-Scans-on-InnoDB"><a href="#Impact-of-Full-Table-Scans-on-InnoDB" class="headerlink" title="Impact of Full Table Scans on InnoDB"></a>Impact of Full Table Scans on InnoDB</h2><p>InnoDB uses a Least Recently Used (LRU) algorithm for memory management. This algorithm prioritizes evicting the least recently used data.</p>
+<p>InnoDB’s LRU algorithm for managing the Buffer Pool uses a linked list.</p>
+<ol>
+<li><p>In state 1 of the diagram, P1 is at the head of the list, indicating it was the most recently accessed data page. Let’s assume that memory can only hold this many data pages.</p>
+</li>
+<li><p>At this point, a read request accesses P3, moving it to the front as state 2.</p>
+</li>
+<li><p>State 3 indicates that the accessed data page doesn’t exist in the list, so a new data page Px is allocated in the Buffer Pool. However, since memory is full, a data page Pm at the end of the list is cleared, and Px’s content is stored in it, moving Px to the front.</p>
+</li>
+</ol>
+<p>Effectively, the data page Pm, which hasn’t been accessed for the longest time, is evicted.</p>
+<p>Imagine scanning a 200GB table using this algorithm, especially for a historical data table that isn’t typically accessed. The scanning process would replace the contents of the Buffer Pool with the scanned data pages, leading to a drop in Buffer Pool hit rate and slower SQL response times.</p>
+<p>InnoDB cannot use this LRU algorithm directly. In reality, InnoDB has improved upon the LRU algorithm.</p>
+<p>In InnoDB’s implementation, the LRU list is split into a young area and an old area in a 5:3 ratio. LRU_old points to the start of the old area, which is at 5&#x2F;8 of the list. This means that the first 5&#x2F;8 of the list is the young area, while the last 3&#x2F;8 is the old area.</p>
+<p>The improved LRU algorithm works as follows:</p>
+<ol>
+<li><p>In state 1, when accessing data page P3, since it’s in the young area, it’s moved to the front, becoming state 2.</p>
+</li>
+<li><p>When accessing a new data page not in the current list, it will be placed in the LRU_old section if memory is full.</p>
+</li>
+<li><p>Data pages in the old area, when accessed, will be judged based on how long they have been in the list:</p>
+<ul>
+<li>If a data page has been in the LRU list for more than 1 second, it will be moved to the front.</li>
+<li>If a data page has been in the list for less than 1 second, its position remains unchanged. The 1-second duration is controlled by the <code>innodb_old_blocks_time</code> parameter, with a default value of 1000 milliseconds.</li>
+</ul>
+</li>
+</ol>
+<p>Suppose you scan a 200GB table using this algorithm, and the table contains historical data with infrequent access. In this case, the scanning process will effectively replace the contents of the Buffer Pool with data from the historical table.</p>
+<p>For a production database serving live business operations, this is not ideal. The Buffer Pool’s memory hit rate drops, disk I&#x2F;O pressure increases, and SQL query responses become slower.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://junhezoooo.github.io/MyBlog.github.io">Junhe(Ivy) Zou</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://junhezoooo.github.io/MyBlog.github.io/2023/05/03/blog15/">https://junhezoooo.github.io/MyBlog.github.io/2023/05/03/blog15/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/MyBlog.github.io/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1769&amp;q=80" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/MyBlog.github.io/2023/05/03/blog12/" title="MySQL Master-Slave Replication Principles"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">MySQL Master-Slave Replication Principles</div></div></a></div><div class="next-post pull-right"><a href="/MyBlog.github.io/2023/05/03/blog4/" title="MySQL Locking Mechanisms"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">MySQL Locking Mechanisms</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/MyBlog.github.io/2023/05/03/blog10/" title="Temporarily Enhancing MySQL Performance"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">Temporarily Enhancing MySQL Performance</div></div></a></div><div><a href="/MyBlog.github.io/2023/05/03/blog11/" title="MySQL Logging Mechanism"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">MySQL Logging Mechanism</div></div></a></div><div><a href="/MyBlog.github.io/2023/05/03/blog13/" title="MySQL Parallel Replication Strategies"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">MySQL Parallel Replication Strategies</div></div></a></div><div><a href="/MyBlog.github.io/2023/05/03/blog12/" title="MySQL Master-Slave Replication Principles"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">MySQL Master-Slave Replication Principles</div></div></a></div><div><a href="/MyBlog.github.io/2023/05/03/blog4/" title="MySQL Locking Mechanisms"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">MySQL Locking Mechanisms</div></div></a></div><div><a href="/MyBlog.github.io/2023/05/03/blog14/" title="Master-Slave Switching Process"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-03</div><div class="title">Master-Slave Switching Process</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1769&amp;q=80" onerror="this.onerror=null;this.src='/MyBlog.github.io/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Junhe(Ivy) Zou</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/MyBlog.github.io/archives/"><div class="headline">Articles</div><div class="length-num">23</div></a><a href="/MyBlog.github.io/tags/"><div class="headline">Tags</div><div class="length-num">12</div></a><a href="/MyBlog.github.io/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Data-Recovery-Methods"><span class="toc-number">1.</span> <span class="toc-text">Data Recovery Methods</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Recovering-Deleted-Rows"><span class="toc-number">1.1.</span> <span class="toc-text">Recovering Deleted Rows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Recovering-Deleted-Databases-or-Tables"><span class="toc-number">1.2.</span> <span class="toc-text">Recovering Deleted Databases or Tables</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Recovering-from-rm-Data-Deletion"><span class="toc-number">1.3.</span> <span class="toc-text">Recovering from rm Data Deletion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Killing-a-Query-Thread"><span class="toc-number">1.4.</span> <span class="toc-text">Killing a Query Thread</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Impact-of-Full-Table-Scans-on-Server-Layer"><span class="toc-number">1.5.</span> <span class="toc-text">Impact of Full Table Scans on Server Layer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Impact-of-Full-Table-Scans-on-InnoDB"><span class="toc-number">1.6.</span> <span class="toc-text">Impact of Full Table Scans on InnoDB</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/MyBlog.github.io/2023/09/07/Hi/" title="Hi">Hi</a><time datetime="2023-09-07T04:04:57.000Z" title="Created 2023-09-07 00:04:57">2023-09-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/MyBlog.github.io/2023/08/01/JavaConcurrency5/" title="Thread-Safe Collection Classes">Thread-Safe Collection Classes</a><time datetime="2023-08-01T18:33:35.000Z" title="Created 2023-08-01 14:33:35">2023-08-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/MyBlog.github.io/2023/08/01/blog1/" title="MySQL Server Architecture?">MySQL Server Architecture?</a><time datetime="2023-08-01T18:33:35.000Z" title="Created 2023-08-01 14:33:35">2023-08-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/MyBlog.github.io/2023/05/03/JavaConcurrency1/" title="Processes and Threads">Processes and Threads</a><time datetime="2023-05-03T04:00:00.000Z" title="Created 2023-05-03 00:00:00">2023-05-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/MyBlog.github.io/2023/05/03/JavaConcurrency2/" title="Multithreading and Concurrency Concepts">Multithreading and Concurrency Concepts</a><time datetime="2023-05-03T04:00:00.000Z" title="Created 2023-05-03 00:00:00">2023-05-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Junhe(Ivy) Zou</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/MyBlog.github.io/js/utils.js"></script><script src="/MyBlog.github.io/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
